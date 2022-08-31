@@ -1,0 +1,12 @@
+.Button {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  &:hover {
+    background-color: rgba($color: #a1a1a1, $alpha: 0.5);
+    color: white;
+    cursor: pointer;
+  }
+}
