@@ -8,16 +8,22 @@ const DropMenu = (props) => {
     props.onClose()
   }
   const x = props.DDLP
+  const y = props.DDTP
   const root = document.documentElement
   root.style.setProperty("--left-position", x)
+  root.style.setProperty("--top-position", y)
+
+  console.log(x, y)
   return (
-    <ul className="drop_menu" onClick={menuCloseHandler}>
-      {props.items.map((item, index) => (
-        <Link key={index} to="products">
-          <li> {item}</li>
-        </Link>
-      ))}
-    </ul>
+    <>
+      <ul className="drop_menu" onClick={menuCloseHandler}>
+        {props.items.map((item, index) => (
+          <Link key={index} to={item.url}>
+            <li> {item.name}</li>
+          </Link>
+        ))}
+      </ul>
+    </>
   )
 }
 

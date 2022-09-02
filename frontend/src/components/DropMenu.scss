@@ -1,26 +1,35 @@
 // @import "../App.scss";
 :root {
   --left-position: 24rem;
+  --top-position: 20rem;
 }
 $leftPosition: var(--left-position);
+$topPosition: var(--top-position);
 
 .drop_menu {
   position: absolute;
-  top: 0rem;
+  top: $topPosition;
   left: $leftPosition;
   background-color: rgb(204, 216, 218);
   z-index: 10;
   // color: rgb(234, 190, 11);
   font-size: 1.6rem;
   opacity: 0.7;
-  padding: 1rem 1rem;
+  // padding: 1rem 0;
+  width: 5rem;
 
   & li {
-    margin-top: 1rem;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(black, 0.3);
     color: rgb(98, 74, 29);
     &:hover {
       cursor: pointer;
       color: rgb(215, 134, 42);
     }
   }
+}
+ul {
+  background-color: aqua;
 }

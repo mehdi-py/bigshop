@@ -1,5 +1,11 @@
 const menuItems = {
-  hotChoices: ["book", "booklet", "pencil"],
-  categories: ["foods", "beverage", "toys", "office Tools"],
+  hotChoices: [
+    { name: "book", url: "/bookstore" },
+    { name: "pencil", url: "/penStore" },
+  ],
+  categories: [
+    { name: "foods", url: "/foods" },
+    { name: "cars", url: "/cars" },
+  ],
 }
 export default menuItems

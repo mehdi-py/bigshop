@@ -1,8 +1,8 @@
 .header {
   display: flex;
+  width: 100vw;
 
   flex-direction: column;
-  // height: 20rem;
 
   &__basic {
     height: 3rem;
@@ -13,14 +13,13 @@
   }
 
   &__main {
+    height: 7rem;
     display: flex;
     position: relative;
-    display: flex;
     justify-content: space-around;
     align-items: center;
-
-    justify-content: space-around;
     background-color: antiquewhite;
+    padding: 1rem 0;
 
     & input {
       width: 100%;
@@ -61,4 +60,8 @@
   position: fixed;
   top: 0rem;
   left: 0;
+  width: 100vw;
+}
+.onFixed_bottomMargin {
+  margin-bottom: 7.1rem;
 }

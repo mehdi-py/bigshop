@@ -8,12 +8,16 @@ import DropMenu from "./DropMenu"
 const Navbar = () => {
   // for intersection observation
   const navRef = useRef()
-  // to find offsetLeft
+  // to find offsets
   const hotChiocesRef = useRef()
   const categoryRef = useRef()
+
   const [DDLP, setDDLP] = useState(0)
+  const [DDTP, setDDTP] = useState(0)
+
   const [items, setItems] = useState([])
 
+  // to make second nav fixed
   const [navStatus, setNavStatus] = useState()
   // to show/hide dropdown menu
   const [categoryMenu, setCategoryMenu] = useState(false)
@@ -34,15 +38,31 @@ const Navbar = () => {
     }
   }, [])
 
-  console.log(menuItems.categories)
+  useEffect(() => {
+    const bodyCLickHandler = (e) => {
+      if (
+        !categoryRef?.current.contains(e.target) &&
+        !hotChiocesRef?.current.contains(e.target)
+      ) {
+        setCategoryMenu(false)
+      }
+    }
+    document.addEventListener("click", bodyCLickHandler)
+    return () => {
+      document.removeEventListener("click", bodyCLickHandler)
+    }
+  }, [])
 
   const categoryClickHandler = () => {
     setDDLP(categoryRef.current.offsetLeft)
+    setDDTP(categoryRef.current.offsetTop)
     setItems(menuItems.categories)
     setCategoryMenu(true)
   }
   const HotChiocesClickHandler = () => {
     setDDLP(hotChiocesRef.current.offsetLeft)
+    setDDTP(hotChiocesRef.current.offsetTop)
+
     setItems(menuItems.hotChoices)
     setCategoryMenu(true)
   }
@@ -51,7 +71,11 @@ const Navbar = () => {
     setCategoryMenu(false)
   }
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${
+        !navStatus && styles.onFixed_bottomMargin
+      }`}
+    >
       <nav ref={navRef} className={styles.header__basic}>
         <p> Our Brand Our Pride</p>
         <p>20% Discount</p>
@@ -61,6 +85,9 @@ const Navbar = () => {
           !navStatus && styles.searchBar_fixed
         }`}
       >
+        <div>
+          <i>Logo</i>
+        </div>
         <div>
           <Button
             text={"Categories"}
@@ -89,6 +116,7 @@ const Navbar = () => {
           <DropMenu
             onClose={categoryCloseHandler}
             DDLP={`${DDLP}px`}
+            DDTP={`${DDTP}px`}
             items={items}
           />
         )}
