@@ -1,6 +1,5 @@
 import React from "react"
 import styles from "./HomeScreen.module.scss"
-import Svg from "../utils/Svg"
 import Carousel from "../components/Carousel"
 
 const HomeScreen = () => {
