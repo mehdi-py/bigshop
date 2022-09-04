@@ -1,5 +1,5 @@
 import React from "react"
-import "./DropMenu.scss"
+import styles from "./DropMenu.module.scss"
 import { Link } from "react-router-dom"
 
 const DropMenu = (props) => {
@@ -8,15 +8,15 @@ const DropMenu = (props) => {
     props.onClose()
   }
   const x = props.DDLP
-  const y = props.DDTP
   const root = document.documentElement
   root.style.setProperty("--left-position", x)
-  root.style.setProperty("--top-position", y)
 
-  console.log(x, y)
   return (
     <>
-      <ul className="drop_menu" onClick={menuCloseHandler}>
+      <ul
+        className={`${styles.drop_menu} ${props.class && styles.menuFixed}`}
+        onClick={menuCloseHandler}
+      >
         {props.items.map((item, index) => (
           <Link key={index} to={item.url}>
             <li> {item.name}</li>

@@ -1,0 +1,50 @@
+:root {
+  --header-slide: 0;
+}
+$header-slide: var(--header-slide);
+.container {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  overflow-x: hidden;
+}
+.slider {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 25%;
+  align-items: center;
+  transform: translate($header-slide);
+  width: 95%;
+  gap: 0.25rem;
+  position: relative;
+  justify-content: center;
+}
+.slider > img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+.leftHandle,
+.rightHandle {
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+  cursor: pointer;
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  transition: transform 0.25s;
+  &:hover {
+    outline: none;
+    transform: scale(1.2);
+  }
+}
+
+.leftHandle {
+  left: 2rem;
+}
+.rightHandle {
+  right: 2rem;
+}

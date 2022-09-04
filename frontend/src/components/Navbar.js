@@ -1,24 +1,33 @@
 import React, { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import styles from "./Navbar.module.scss"
-import SearchSvg from "../assets/SearchSvg"
 import menuItems from "../assets/MenuItms"
 import Button from "./Button"
 import DropMenu from "./DropMenu"
+import useWindowResize from "../utils/useWindowResize"
+import Svg from "../utils/Svg"
 
 const Navbar = () => {
+  // a custom Hook give access to window size change.
+  const [size, setSize] = useWindowResize()
   // for intersection observation
   const navRef = useRef()
-  // to find offsets
+  // to find offsets of these elements
   const hotChiocesRef = useRef()
   const categoryRef = useRef()
 
+  // DropDown Left Posintion
   const [DDLP, setDDLP] = useState(0)
-  const [DDTP, setDDTP] = useState(0)
 
+  // to store selected Menu
+  const [selectedMenu, setSelectedMenu] = useState("")
+
+  //Lis of menu items
   const [items, setItems] = useState([])
 
-  // to make second nav fixed
+  // when first nave intersection is happened
   const [navStatus, setNavStatus] = useState()
+
   // to show/hide dropdown menu
   const [categoryMenu, setCategoryMenu] = useState(false)
 
@@ -38,6 +47,7 @@ const Navbar = () => {
     }
   }, [])
 
+  // to close menu when outside is clicked
   useEffect(() => {
     const bodyCLickHandler = (e) => {
       if (
@@ -53,17 +63,26 @@ const Navbar = () => {
     }
   }, [])
 
+  // to determine menu placement by window size changing
+  useEffect(() => {
+    if (selectedMenu === "category") {
+      setDDLP(categoryRef.current.offsetLeft)
+    } else if (selectedMenu === "hotChoices") {
+      setDDLP(hotChiocesRef.current.offsetLeft)
+    }
+
+    // setDDLP(hotChiocesRef.current.offsetLeft)
+  }, [size, selectedMenu])
+
   const categoryClickHandler = () => {
-    setDDLP(categoryRef.current.offsetLeft)
-    setDDTP(categoryRef.current.offsetTop)
     setItems(menuItems.categories)
+    setSelectedMenu("category")
     setCategoryMenu(true)
   }
   const HotChiocesClickHandler = () => {
-    setDDLP(hotChiocesRef.current.offsetLeft)
-    setDDTP(hotChiocesRef.current.offsetTop)
-
     setItems(menuItems.hotChoices)
+    setSelectedMenu("hotChoices")
+
     setCategoryMenu(true)
   }
 
@@ -85,8 +104,10 @@ const Navbar = () => {
           !navStatus && styles.searchBar_fixed
         }`}
       >
-        <div>
-          <i>Logo</i>
+        <div className={styles.logo}>
+          <Link to="/">
+            <Svg name="icon-spoon-knife" color="#818" size="50" />
+          </Link>
         </div>
         <div>
           <Button
@@ -103,7 +124,7 @@ const Navbar = () => {
         <div className={styles.header__searchBar}>
           <input type="text" placeholder="search anything" />
           <button>
-            <SearchSvg />
+            <Svg name="icons8-suche" color="#456" size="40" />
           </button>
         </div>
         <div>
@@ -116,8 +137,8 @@ const Navbar = () => {
           <DropMenu
             onClose={categoryCloseHandler}
             DDLP={`${DDLP}px`}
-            DDTP={`${DDTP}px`}
             items={items}
+            class={!navStatus}
           />
         )}
       </div>

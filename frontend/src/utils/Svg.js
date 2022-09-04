@@ -1,14 +1,9 @@
-// import sprite from "../assets/svgSprite.svg"
-import sprite from "../assets/BigShopSprite.svg"
+import sprite from "../assets/symbol-defs.svg"
+// import sprite from "../assets/newSprite.svg"
 
 const Svg = ({ name, color, size }) => {
   return (
-    <svg
-      style={{ position: "absolute" }}
-      width={size}
-      viewBox="0 0 1000 500"
-      fill={color}
-    >
+    <svg width={size} viewBox="0 0 300 150" fill={color}>
       <use href={`${sprite}#${name}`} />
     </svg>
   )

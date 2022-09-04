@@ -13,6 +13,7 @@
   }
 
   &__main {
+    z-index: 20;
     height: 7rem;
     display: flex;
     position: relative;
@@ -52,7 +53,7 @@
   }
   &__dropdown_container {
     flex: 1;
-    position: relative;
+    // position: relative;
   }
 }
 
@@ -64,4 +65,20 @@
 }
 .onFixed_bottomMargin {
   margin-bottom: 7.1rem;
+}
+.dropdown_fixed {
+  position: fixed;
+  top: 4.7rem;
+}
+
+.logo {
+  padding: 1rem;
+  width: 6rem;
+  height: 6rem;
+  border: 1px solod #456;
+  border-radius: 50%;
+  background-color: #aaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,11 +1,14 @@
 .Button {
   padding: 0.5rem 1rem;
   font-size: 1.2rem;
+  border-radius: 2px;
   background-color: transparent;
   border: none;
   outline: none;
   &:hover {
     background-color: rgba($color: #a1a1a1, $alpha: 0.5);
+    box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: 0.1);
+
     color: white;
     cursor: pointer;
   }
