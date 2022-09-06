@@ -5,84 +5,63 @@ import { useRef, useState } from "react"
 
 const Carousel = () => {
   const slideRef = useRef()
-  const [slideShift, setSlideShift] = useState(0)
-  const root = document.documentElement
-  const calculation = slideShift * 25
-  root.style.setProperty("--header-slide", ` ${-1 * calculation}%`)
+  const [carouselIndex, setCarouselIndex] = useState(0)
   const leftArrowClickHandler = () => {
-    setSlideShift((prev) => prev + 1)
+    console.log("LeftcarouselIndex")
+    console.log(carouselIndex)
+    if (carouselIndex === 0) {
+      setCarouselIndex(2)
+    } else {
+      setCarouselIndex((prev) => prev - 1)
+    }
   }
   const rightArrowClickHandler = () => {
-    setSlideShift((prev) => prev - 1)
+    console.log("Right_carouselIndex")
+    console.log(carouselIndex)
+
+    if (carouselIndex === 2) {
+      setCarouselIndex(0)
+    } else {
+      setCarouselIndex((prev) => prev + 1)
+    }
   }
+
+  const root = document.documentElement
+  const calculation = carouselIndex * -100
+  root.style.setProperty("--carousel-index", ` ${calculation}%`)
+
   return (
     <div className={styles.carousel__container}>
-      <div className={styles.slider}>
-        <div className={styles.slider__group}>
-          <button className={styles.leftHandle} onClick={leftArrowClickHandler}>
-            <Svg name="chevron-left" color="#f1f" size="30" />
-          </button>
-          <img src="https://via.placeholder.com/210?text=1" />
-          <img src="https://via.placeholder.com/220?text=2" />
-          <img src="https://via.placeholder.com/230?text=3" />
-          <img src="https://via.placeholder.com/230?text=4" />
-          <img src="https://via.placeholder.com/230?text=5" />
-          <button
-            className={styles.rightHandle}
-            onClick={rightArrowClickHandler}
-          >
-            <Svg name="chevron-right" color="#f1f" size="30" />
-          </button>
+      <button
+        className={styles.chevron__left_conatiner}
+        onClick={leftArrowClickHandler}
+      >
+        <div className={styles.chevron}>
+          <span>&#8249;</span>
         </div>
-        <div className={styles.slider__group}>
-          <button className={styles.leftHandle} onClick={leftArrowClickHandler}>
-            <Svg name="chevron-left" color="#f1f" size="30" />
-          </button>
-          <img src="https://via.placeholder.com/240?text=6" />
-          <img src="https://via.placeholder.com/250?text=7" />
-          <img src="https://via.placeholder.com/210?text=8" />
-          <img src="https://via.placeholder.com/210?text=9" />
-          <img src="https://via.placeholder.com/210?text=10" />
-          <button
-            className={styles.rightHandle}
-            onClick={rightArrowClickHandler}
-          >
-            <Svg name="chevron-right" color="#f1f" size="30" />
-          </button>
-        </div>
-        <div className={styles.slider__group}>
-          <button className={styles.leftHandle} onClick={leftArrowClickHandler}>
-            <Svg name="chevron-left" color="#f1f" size="30" />
-          </button>
-          <img src="https://via.placeholder.com/220?text=11" />
-          <img src="https://via.placeholder.com/230?text=12" />
-          <img src="https://via.placeholder.com/240?text=13" />
-          <img src="https://via.placeholder.com/240?text=14" />
-          <img src="https://via.placeholder.com/240?text=15" />
-          <button
-            className={styles.rightHandle}
-            onClick={rightArrowClickHandler}
-          >
-            <Svg name="chevron-right" color="#f1f" size="30" />
-          </button>
-        </div>
-        <div className={styles.slider__group}>
-          <button className={styles.leftHandle} onClick={leftArrowClickHandler}>
-            <Svg name="chevron-left" color="#f1f" size="30" />
-          </button>
-          <img src="https://via.placeholder.com/220?text=11" />
-          <img src="https://via.placeholder.com/230?text=12" />
-          <img src="https://via.placeholder.com/240?text=13" />
-          <img src="https://via.placeholder.com/240?text=14" />
-          <img src="https://via.placeholder.com/240?text=15" />
-          <button
-            className={styles.rightHandle}
-            onClick={rightArrowClickHandler}
-          >
-            <Svg name="chevron-right" color="#f1f" size="30" />
-          </button>
-        </div>
+      </button>
+      <div className={styles.carousel__slider}>
+        <img src="https://via.placeholder.com/210/0F0?text=1" />
+        <img src="https://via.placeholder.com/220/0F0?text=2" />
+        <img src="https://via.placeholder.com/240/0F0?text=3" />
+        <img src="https://via.placeholder.com/250/0F0?text=4" />
+        <img src="https://via.placeholder.com/260/0F0?text=5" />
+        <img src="https://via.placeholder.com/230/0F0?text=6" />
+        <img src="https://via.placeholder.com/230/0F0?text=7" />
+        <img src="https://via.placeholder.com/230/0F0?text=8" />
+        <img src="https://via.placeholder.com/230/0F0?text=9" />
+        <img src="https://via.placeholder.com/210/0F0?text=10" />
+        <img src="https://via.placeholder.com/220/0F0?text=11" />
+        <img src="https://via.placeholder.com/240/0F0?text=12" />
       </div>
+      <button
+        className={styles.chevron__right_conatiner}
+        onClick={rightArrowClickHandler}
+      >
+        <div className={styles.chevron}>
+          <span>&#8250;</span>
+        </div>
+      </button>
     </div>
   )
 }

@@ -1,65 +1,65 @@
 :root {
-  --header-slide: 0;
+  --carousel-index: 0%;
 }
-$header-slide: var(--header-slide);
+$carousel-index: var(--carousel-index);
 
 .carousel__container {
   display: flex;
-  overflow: scroll;
+  justify-content: center;
+
+  // margin: 0 0.25rem;
 }
-.slider {
-  transition: transform 0.5s;
-  position: relative;
 
-  display: grid;
-  position: relative;
+.carousel__slider {
+  display: flex;
+  margin: 0 0.25rem;
+  transform: translate($carousel-index);
+  transition: transform 2s;
 
-  grid-auto-flow: column;
-  grid-auto-columns: 95vw;
-  gap: 0.25rem;
-  // transform: translate(calc($header-slide + 0.5rem));
-  transform: translate(-0%);
-  &__group {
-    display: grid;
-
-    grid-template-columns: repeat(5, 1fr);
-    justify-content: center;
-    justify-items: center;
-    gap: 0.25rem;
-    // border: 2px solid yellow;
-    & > img {
-      width: 100%;
-      aspect-ratio: 16/9;
+  & img {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 0.25rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+.chevron__right_conatiner,
+.chevron__left_conatiner {
+  transition: background-color 0.15s;
+  font-size: 5rem;
+  flex-grow: 0;
+  color: white;
+  background-color: rgba(0 0 0 /0.35);
+  z-index: 10;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.25rem 0rem;
+  border-radius: 0.5rem;
+  border: none;
+  &:hover,
+  &:focus {
+    background-color: rgba(0 0 0 /0.5);
+    cursor: pointer;
+    & .chevron {
+      transform: scale(1.2);
     }
   }
 }
-.slider > img {
-  width: 100%;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  border-radius: 0.5rem;
-}
-.leftHandle,
-.rightHandle {
-  margin: 0;
-  padding: 0;
-  z-index: 100;
-  cursor: pointer;
-  position: absolute;
-  border: none;
-  background-color: transparent;
-  transition: transform 0.25s;
-  &:hover {
-    outline: none;
-    transform: scale(1.2);
-  }
+.chevron {
+  transition: transform 0.15s ease-in;
 }
 
-.leftHandle {
-  left: 0.5rem;
-  top: 2.5rem;
+.chevron__left_container {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
-.rightHandle {
-  right: -0.75rem;
-  top: 2.5rem;
+.chevron__right_container {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
