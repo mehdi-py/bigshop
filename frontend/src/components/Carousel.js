@@ -4,26 +4,61 @@ import styles from "./Carousel.module.scss"
 import { useRef, useState } from "react"
 
 const Carousel = () => {
-  const slideRef = useRef()
+  const sliderRef = useRef()
   const [carouselIndex, setCarouselIndex] = useState(0)
-  const leftArrowClickHandler = () => {
-    console.log("LeftcarouselIndex")
-    console.log(carouselIndex)
-    if (carouselIndex === 0) {
-      setCarouselIndex(2)
-    } else {
-      setCarouselIndex((prev) => prev - 1)
+
+  const containerUpdate = (sliderNode) => {
+    console.log("sliderNode")
+    console.log(sliderNode)
+    let elements = Array.from(sliderNode.current?.childNodes)
+    const extracted = elements.splice(0, 4)
+    elements.push(...extracted)
+
+    const toNodeList = function (arrayOfNodes) {
+      const fragment = document.createDocumentFragment()
+      arrayOfNodes.forEach(function (item) {
+        fragment.appendChild(item.cloneNode())
+      })
+      console.log("fragment")
+      console.log(fragment)
+
+      return fragment
     }
+    const createdFargment = toNodeList(elements)
+    console.log("createdFargment")
+    console.log(createdFargment)
+
+    return createdFargment
+  }
+  const leftArrowClickHandler = () => {
+    setCarouselIndex((prev) => prev - 1)
   }
   const rightArrowClickHandler = () => {
-    console.log("Right_carouselIndex")
-    console.log(carouselIndex)
+    setCarouselIndex((prev) => prev + 1)
+    setTimeout(() => {
+      // const sliderRef = document.querySelector("#slider")
+      const conatinerNode = document.querySelector("#container")
 
-    if (carouselIndex === 2) {
-      setCarouselIndex(0)
-    } else {
-      setCarouselIndex((prev) => prev + 1)
-    }
+      const updatedNodeList = containerUpdate(sliderRef)
+      console.log("updatedNodeList")
+      console.log(updatedNodeList)
+      while (sliderRef.current.lastChild) {
+        sliderRef.current.removeChild(sliderRef.current.lastChild)
+      }
+      console.log("sliderRef.current after delete")
+      console.log(sliderRef.current)
+
+      sliderRef.current.appendChild(updatedNodeList)
+      console.log("sliderRef.current after append")
+      console.log(sliderRef.current)
+      // sliderRef.current.style.transition = "null"
+
+      // setCarouselIndex((prev) => prev - 1)
+      // sliderRef.current.style.transition = "transform 2s"
+
+      // console.log("conatinerNode")
+      // console.log(conatinerNode)
+    }, 2000)
   }
 
   const root = document.documentElement
@@ -40,7 +75,7 @@ const Carousel = () => {
           <span>&#8249;</span>
         </div>
       </button>
-      <div className={styles.carousel__slider}>
+      <div className={styles.carousel__slider} ref={sliderRef}>
         <img src="https://via.placeholder.com/210/0F0?text=1" />
         <img src="https://via.placeholder.com/220/0F0?text=2" />
         <img src="https://via.placeholder.com/240/0F0?text=3" />

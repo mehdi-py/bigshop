@@ -11,10 +11,10 @@ $carousel-index: var(--carousel-index);
 }
 
 .carousel__slider {
+  transition: transform 2s;
   display: flex;
   margin: 0 0.25rem;
   transform: translate($carousel-index);
-  transition: transform 2s;
 
   & img {
     flex: 0 0 25%;
